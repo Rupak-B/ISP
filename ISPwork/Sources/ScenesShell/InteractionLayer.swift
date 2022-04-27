@@ -1,4 +1,5 @@
 import Scenes
+import Igis
 
   /*
      This class is responsible for the interaction Layer.
@@ -8,11 +9,19 @@ import Scenes
 
 class InteractionLayer : Layer {
 
-      init() {
-          // Using a meaningful name can be helpful for debugging
-          super.init(name:"Interaction")
+    let projectileExample : Projectile
 
-          // We insert our RenderableEntities in the constructor
+    init() {
+        self.projectileExample = Projectile(velocityY : 3, rectangle: Rectangle(rect:Rect(topLeft: Point(), size:Size(width: 4, height: 30)), fillMode: .fill))
+        
+        // Using a meaningful name can be helpful for debugging
+        super.init(name:"Interaction")
+        
+        // We insert our RenderableEntities in the constructor
+        insert(entity: projectileExample, at: .front)
+    }
 
-      }
-  }
+    func removeEntity(entity: RenderableEntity) {
+        remove(entity: entity)
+    }
+}

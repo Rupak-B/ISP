@@ -8,7 +8,7 @@ import Scenes
 
 class BackgroundLayer : Layer {
     let background = Background()
-    let clearBackground = ClearRectangle()
+    let clearBackground = ClearBackground()
 
       init() {
           // Using a meaningful name can be helpful for debugging
@@ -16,6 +16,6 @@ class BackgroundLayer : Layer {
 
           // We insert our RenderableEntities in the constructor
           insert(entity:background, at:.back)
-          insert (entity:clearBackground, at: .back)
+          insert(entity:clearackground, at: .back)
       }
   }
