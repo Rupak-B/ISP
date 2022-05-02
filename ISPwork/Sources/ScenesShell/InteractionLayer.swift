@@ -12,6 +12,7 @@ class InteractionLayer : Layer, KeyDownHandler {
     let projectileExample : Projectile
     let ufo = UFO()
     let ufo2 = UFO()
+    var tick = 0 
 
     let ball = Ball()
     let background = Background()
@@ -22,7 +23,7 @@ class InteractionLayer : Layer, KeyDownHandler {
     init() {
         self.projectileExample = Projectile(velocityY : 3, rectangle: Rectangle(rect:Rect(topLeft: Point(), size:Size(width: 4, height: 30)), fillMode: .fill))
         
-        // Using a meaningful name can be helpful for debugging
+      // Using a meaningful name can be helpful for debugging
         super.init(name:"Interaction")
         
         // We insert our RenderableEntities in the constructor
@@ -50,7 +51,7 @@ class InteractionLayer : Layer, KeyDownHandler {
     {
         paddleLeft.move(to:Point(x: 20, y: 480))
         paddleRight.move(to:Point(x: 1875, y: 480))
-
+        projectileExample.move(to:Point(x: 500, y:200))
         dispatcher.registerKeyDownHandler(handler: self)
 
     }
@@ -77,6 +78,9 @@ class InteractionLayer : Layer, KeyDownHandler {
 
     override func postTeardown()
     {
+        tick += 1
+        print(tick)
         dispatcher.unregisterKeyDownHandler(handler: self)
     }
+    
 }

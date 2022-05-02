@@ -1,3 +1,4 @@
+
 import Foundation
 import Scenes
 import Igis
@@ -44,5 +45,8 @@ class Projectile : RenderableEntity {
 
         canvas.render(fillStyle, rectangle)
     }
-    
+    func move(to point:Point)
+    {
+        rectangle.rect.topLeft = point
+    }
 }

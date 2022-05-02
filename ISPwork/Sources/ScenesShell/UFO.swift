@@ -114,8 +114,9 @@ var x = 0
                 }
                 else {
                     velocityY += Int.random(in: 0..<2)
-        }
-        func growRadius(radius: inout Int, defaultRadius: Int){
+                }
+                  
+/*        func growRadius(radius: inout Int, defaultRadius: Int){
             if radius < defaultRadius{
                 var change = 5
                 if Double(radius).sign == .minus{
@@ -130,7 +131,9 @@ var x = 0
 //       slowDown(velocity: &velocityX, defaultVelocity:defaultVelocityX, doubleVelocity: &doubleVelocityX)
   //     slowDown(velocity: &velocityY, defaultVelocity:defaultVelocityY, doubleVelocity: &doubleVelocityY)
        // growRadius(radius: &ellipse.radiusX, defaultRadius:defaultRadiusX)
+
        // growRadius(radius: &ellipse.radiusY, defaultRadius:defaultRadiusY)
+ */
     }
     override func setup(canvasSize: Size, canvas: Canvas)
     {
@@ -177,6 +180,7 @@ var x = 0
         didRender = true
         x+=1
         tick+=1
-        print(tick)
+//        print(tick)
     }
 }
+
