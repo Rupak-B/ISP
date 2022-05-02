@@ -13,7 +13,7 @@ class InteractionLayer : Layer, KeyDownHandler {
     let ufo = UFO()
     let ufo2 = UFO()
     var tick = 0 
-
+    let moon = Moon()
     let ball = Ball()
     let background = Background()
 
@@ -28,7 +28,7 @@ class InteractionLayer : Layer, KeyDownHandler {
         
         // We insert our RenderableEntities in the constructor
         insert(entity: background, at:.back)
-
+        insert(entity: moon, at: .back)
         insert(entity: ufo, at: .front)
         ufo.changeVelocity(velocityX: 26, velocityY: 12)
         insert(entity: projectileExample, at: .front)
