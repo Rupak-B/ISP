@@ -35,7 +35,7 @@ class InteractionLayer : Layer, KeyDownHandler {
         insert(entity: ufo2, at: .front)
         ufo2.changeVelocity(velocityX: -20, velocityY: 12)
 
-        ball.changeVelocity(velocityX: 12, velocityY: 12)
+        ball.changeVelocity(velocityX: 15, velocityY: 10)
 
         insert(entity: ball, at: .front)
 

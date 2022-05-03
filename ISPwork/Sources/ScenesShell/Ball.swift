@@ -28,10 +28,10 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     
     init()
     {
-        self.velocityX = 12
-        self.velocityY = 12
-        self.defaultVelocityX = 12
-        self.defaultVelocityY = 12
+        self.velocityX = 15
+        self.velocityY = 10
+        self.defaultVelocityX = 15
+        self.defaultVelocityY = 10
         self.doubleVelocityX = 0
         self.doubleVelocityY = 0
 
@@ -116,8 +116,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     {
         self.velocityX = velocityX
         self.velocityY = velocityY
-        self.defaultVelocityX = 12
-        self.defaultVelocityY = 12
+        self.defaultVelocityX = 15
+        self.defaultVelocityY = 10
         self.doubleVelocityX = Double(velocityX)
         self.doubleVelocityY = Double(velocityY)
     }
@@ -146,24 +146,24 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
 
        // let contactpaddleRight = ((ballBoundingRect.topLeft.x >= paddleRightBoundingRect.topLeft.x) && ((ballBoundingRect.topLeft.y <= paddleRightBoundingRect.bottomLeft.y) && (ballBoundingRect.topLeft.y >= paddleRightBoundingRect.topLeft.y))) || ((ballBoundingRect.topLeft.x >= paddleRightBoundingRect.topLeft.x) && ((ballBoundingRect.bottomLeft.y >= paddleRightBoundingRect.topLeft.y) && (ballBoundingRect.bottomLeft.y <= paddleRightBoundingRect.bottomLeft.y)))
 
-        let contactpaddleLeft = (ballBoundingRect.topLeft.x <= paddleLeftBoundingRect.topRight.x+0) && ((paddleLeftBoundingRect.topLeft.y-50 < ballBoundingRect.topLeft.y) && (paddleLeftBoundingRect.bottomLeft.y+50 > ballBoundingRect.bottomLeft.y))
-        let contactpaddleRight = (ballBoundingRect.topLeft.x >= paddleRightBoundingRect.topRight.x-40) && ((paddleRightBoundingRect.topLeft.y-50 < ballBoundingRect.topLeft.y) && (paddleRightBoundingRect.bottomLeft.y+50 > ballBoundingRect.bottomLeft.y))
+        let contactpaddleLeft = (ballBoundingRect.topLeft.x <= paddleLeftBoundingRect.topRight.x-25) && ((paddleLeftBoundingRect.topLeft.y-55 < ballBoundingRect.topLeft.y) && (paddleLeftBoundingRect.bottomLeft.y+55 > ballBoundingRect.bottomLeft.y))
+        let contactpaddleRight = (ballBoundingRect.topLeft.x >= paddleRightBoundingRect.topRight.x-45) && ((paddleRightBoundingRect.topLeft.y-55 < ballBoundingRect.topLeft.y) && (paddleRightBoundingRect.bottomLeft.y+55 > ballBoundingRect.bottomLeft.y))
         
 //        print(paddleLeftBoundingRect.topLeft.y)
         
         if contactpaddleRight {
             if velocityX >= 0 {
                 print("contactpaddleRight")
-                velocityX *= -6
-                velocityY *= 6
+                velocityX *= -3
+                velocityY *= 3
                 ellipse.radiusX = ellipse.radiusX/2
             }
         }
         if contactpaddleLeft {
             if velocityX <= 0 {
                 print("contactpaddleLeft")
-                velocityX *= -6
-                velocityY *= 6
+                velocityX *= -3
+                velocityY *= 3
                 ellipse.radiusX = ellipse.radiusX/2
             }
         }
@@ -194,15 +194,15 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
             velocityX *= 2
             ellipse.radiusY = ellipse.radiusY/2
         }
-        if abs(velocityY) >= 40
+        if abs(velocityY) >= 30
         {
             velocityY /= abs(velocityY)
-            velocityY *= 40
+            velocityY *= 30
         }
-        if abs(velocityX) >= 40
+        if abs(velocityX) >= 45
         {
             velocityX /= abs(velocityX)
-            velocityX *= 40
+            velocityX *= 45
         } 
         func slowDown(velocity: inout Int, defaultVelocity: Int, doubleVelocity: inout Double){
             doubleVelocity = Double(velocity)
