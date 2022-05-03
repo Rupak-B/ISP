@@ -28,10 +28,10 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     
     init()
     {
-        self.velocityX = 8
-        self.velocityY = 8
-        self.defaultVelocityX = 8
-        self.defaultVelocityY = 8
+        self.velocityX = 12
+        self.velocityY = 12
+        self.defaultVelocityX = 12
+        self.defaultVelocityY = 12
         self.doubleVelocityX = 0
         self.doubleVelocityY = 0
 
@@ -116,8 +116,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     {
         self.velocityX = velocityX
         self.velocityY = velocityY
-        self.defaultVelocityX = 8
-        self.defaultVelocityY = 8
+        self.defaultVelocityX = 12
+        self.defaultVelocityY = 12
         self.doubleVelocityX = Double(velocityX)
         self.doubleVelocityY = Double(velocityY)
     }
@@ -151,17 +151,21 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
         
 //        print(paddleLeftBoundingRect.topLeft.y)
         
-        if contactpaddleRight
-        {
-            print("contactpaddleRight")
-            velocityX *= -6
-            ellipse.radiusY = ellipse.radiusY/2
+        if contactpaddleRight {
+            if velocityX >= 0 {
+                print("contactpaddleRight")
+                velocityX *= -6
+                velocityY *= 6
+                ellipse.radiusX = ellipse.radiusX/2
+            }
         }
-        if contactpaddleLeft
-        {
-            print("contactpaddleLeft")
-            velocityX *= -6
-            ellipse.radiusY = ellipse.radiusY/2
+        if contactpaddleLeft {
+            if velocityX <= 0 {
+                print("contactpaddleLeft")
+                velocityX *= -6
+                velocityY *= 6
+                ellipse.radiusX = ellipse.radiusX/2
+            }
         }
         if tooFarRight{
             leftScore += 1
@@ -169,8 +173,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
                 rightScore = 1
             }
             didRender = false
-            velocityX *= -4
-            velocityY *= 4
+            velocityX *= -2
+            velocityY *= 2
             //taking a property of the ellipse object, radiusX, and we're changing it
             ellipse.radiusX = ellipse.radiusX/2
         }
@@ -180,25 +184,25 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
                 rightScore = 1
             }
             didRender = false
-            velocityX *= -4
-            velocityY *= 4
+            velocityX *= -2
+            velocityY *= 2
             //taking a property of the ellipse object, radiusX, and we're changing it
             ellipse.radiusX = ellipse.radiusX/2
         }
         if tooFarUp || tooFarDown{
-            velocityY *= -4
-            velocityX *= 4
+            velocityY *= -2
+            velocityX *= 2
             ellipse.radiusY = ellipse.radiusY/2
         }
-        if abs(velocityY) >= 20
+        if abs(velocityY) >= 40
         {
             velocityY /= abs(velocityY)
-            velocityY *= 20
+            velocityY *= 40
         }
-        if abs(velocityX) >= 20
+        if abs(velocityX) >= 40
         {
             velocityX /= abs(velocityX)
-            velocityX *= 20
+            velocityX *= 40
         } 
         func slowDown(velocity: inout Int, defaultVelocity: Int, doubleVelocity: inout Double){
             doubleVelocity = Double(velocity)
