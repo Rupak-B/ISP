@@ -11,6 +11,7 @@ class InteractionLayer : Layer, KeyDownHandler {
 
     let projectileExample : Projectile
     let ufo = UFO()
+    let alien = Alien()
     let ufo2 = UFO()
     var tick = 0 
     let moon = Moon()
@@ -30,6 +31,8 @@ class InteractionLayer : Layer, KeyDownHandler {
         insert(entity: background, at:.back)
         insert(entity: moon, at: .front)
         insert(entity: ufo, at: .front)
+        insert(entity: alien, at: .front)
+        alien.changeVelocity(velocityX: 26, velocityY: 12)
         ufo.changeVelocity(velocityX: 26, velocityY: 12)
         insert(entity: projectileExample, at: .front)
         insert(entity: ufo2, at: .front)
