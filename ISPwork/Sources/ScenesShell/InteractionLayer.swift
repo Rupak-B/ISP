@@ -28,7 +28,7 @@ class InteractionLayer : Layer, KeyDownHandler {
         
         // We insert our RenderableEntities in the constructor
         insert(entity: background, at:.back)
-        insert(entity: moon, at: .back)
+        insert(entity: moon, at: .front)
         insert(entity: ufo, at: .front)
         ufo.changeVelocity(velocityX: 26, velocityY: 12)
         insert(entity: projectileExample, at: .front)
