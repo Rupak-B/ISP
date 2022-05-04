@@ -1,10 +1,10 @@
 import Scenes
 import Igis
 
-  /*
-     This class is responsible for the interaction Layer.
-     Internally, it maintains the RenderableEntities for this layer.
-   */
+/*
+ This class is responsible for the interaction Layer.
+ Internally, it maintains the RenderableEntities for this layer.
+ */
 
 
 class InteractionLayer : Layer, KeyDownHandler {
@@ -13,20 +13,20 @@ class InteractionLayer : Layer, KeyDownHandler {
     let ufo = UFO()
     let alien = Alien()
     let ufo2 = UFO()
-    var tick = 0 
+    var tick = 0
     let moon = Moon()
     let ball = Ball()
     let background = Background()
 
     let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:150)))
     let paddleRight = Paddle(rect:Rect(size:Size(width:10, height:150)))
-    
+
     init() {
         self.projectileExample = Projectile(velocityY : 3, rectangle: Rectangle(rect:Rect(topLeft: Point(), size:Size(width: 4, height: 30)), fillMode: .fill))
-        
-      // Using a meaningful name can be helpful for debugging
+
+        // Using a meaningful name can be helpful for debugging
         super.init(name:"Interaction")
-        
+
         // We insert our RenderableEntities in the constructor
         insert(entity: background, at:.back)
         insert(entity: moon, at: .front)
@@ -49,7 +49,7 @@ class InteractionLayer : Layer, KeyDownHandler {
     func removeEntity(entity: RenderableEntity) {
         remove(entity: entity)
     }
- 
+
     override func preSetup(canvasSize: Size, canvas: Canvas)
     {
         paddleLeft.move(to:Point(x: 20, y: 480))
@@ -85,5 +85,6 @@ class InteractionLayer : Layer, KeyDownHandler {
         print(tick)
         dispatcher.unregisterKeyDownHandler(handler: self)
     }
-    
+
 }
+   
