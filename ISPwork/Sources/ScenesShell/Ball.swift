@@ -18,13 +18,17 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     var defaultRadiusX = 26
     var defaultRadiusY = 26
 
-    let maxPattern = 9
+    let maxPattern = 11
     var leftScore = 1
     var rightScore = 1
     var rect: Rect?
 
     let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:100)))
     let paddleRight = Paddle(rect:Rect(size:Size(width:10, height:100)))
+
+    var tick = 0
+
+    var stoop = false
     
     init()
     {
@@ -294,7 +298,11 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     }
     override func render(canvas:Canvas)
     {
-        changeVelocity(velocityX:velocityX, velocityY:velocityY)
+        if stoop == false
+        {
+            changeVelocity(velocityX:velocityX, velocityY:velocityY)
+        }
+        tick += 1
         didRender = false
         if let canvasSize = canvas.canvasSize,  didRender == false
         {
@@ -322,6 +330,15 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
                 renderPattern7(canvas:canvas)
             case 9:
                 renderPattern8(canvas:canvas)
+            case 10:
+                renderPattern9(canvas:canvas)
+            case 11:
+                tick = 0
+                if tick > 50
+                {
+                    stoop = true
+                changeVelocity(velocityX:0, velocityY:0)
+                }
             default:
                 fatalError("Unexpected pattern: \(leftScore)")
             }
@@ -345,6 +362,15 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
                 renderPattern7R(canvas:canvas)
             case 9:
                 renderPattern8R(canvas:canvas)
+            case 10:
+                renderPattern9R(canvas:canvas)
+            case 11:
+                tick = 0
+                if tick > 50
+                {
+                    stoop = true
+                changeVelocity(velocityX:0, velocityY:0)
+                }
             default:
                 fatalError("Unexpected pattern: \(rightScore)")
             }
