@@ -12,7 +12,7 @@ class InteractionLayer : Layer, KeyDownHandler {
     let projectileExample : Projectile
     let ufo = UFO()
     let alien = Alien()
-    let ufo2 = UFO()
+    let ufo2 = UFO2()
     var tick = 0
     let moon = Moon()
     let ball = Ball()
