@@ -115,6 +115,12 @@ class UFO: RenderableEntity, MouseMoveHandler
         else {
             velocityY += Int.random(in: 0..<2)
         }
+//        if velocityX > 2 {
+        //    let pro1 = Projectile(velocityY: 20, rectangle : Rect)
+      //      pro1.setTopLeft(value: Point(x: 100, y: 100))
+    //        pro1.setVelocityX(value: 2)
+      //      InteractionLayer.renderprojectileExample(projectileExample: pro1)
+  //      }
 
         /*        func growRadius(radius: inout Int, defaultRadius: Int){
                   if radius < defaultRadius{
@@ -180,5 +186,11 @@ class UFO: RenderableEntity, MouseMoveHandler
         tick+=1
         //        print(tick)
     }
+    //let pro1 = Projectile()
+    //pro1.setTopLeft(value: Point(x: canvasSize.width / 2 - 300, y: canvasSize.height - 96 - 96 - 30))
+    //pro1.setVelocityX(value: 2)
+//    if tick > 70 {
+      //  interactionLayer.renderCoin(coin: groundCoin)
 }
+
  

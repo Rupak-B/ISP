@@ -11,6 +11,7 @@ class InteractionLayer : Layer, KeyDownHandler {
 
     let projectileExample : Projectile
     let ufo = UFO()
+    let ufo3 = UFO() 
     let alien = Alien()
     let ufo2 = UFO2()
     var tick = 0
@@ -31,9 +32,11 @@ class InteractionLayer : Layer, KeyDownHandler {
         insert(entity: background, at:.back)
         insert(entity: moon, at: .front)
         insert(entity: ufo, at: .front)
+        insert(entity: ufo3, at: .front)
         insert(entity: alien, at: .front)
         alien.changeVelocity(velocityX: 26, velocityY: 12)
         ufo.changeVelocity(velocityX: 26, velocityY: 12)
+        ufo3.changeVelocity(velocityX: 26, velocityY: 12)
         insert(entity: projectileExample, at: .front)
         insert(entity: ufo2, at: .front)
         ufo2.changeVelocity(velocityX: -20, velocityY: 12)
@@ -45,7 +48,10 @@ class InteractionLayer : Layer, KeyDownHandler {
         insert(entity: paddleLeft, at: .front)
         insert(entity: paddleRight, at: .front)
     }
-
+func renderprojectileExample(projectileExample:Projectile) {
+        insert(entity:projectileExample, at:.front)
+    }
+   
     func removeEntity(entity: RenderableEntity) {
         remove(entity: entity)
     }
@@ -85,6 +91,6 @@ class InteractionLayer : Layer, KeyDownHandler {
         print(tick)
         dispatcher.unregisterKeyDownHandler(handler: self)
     }
-
+    
 }
    
