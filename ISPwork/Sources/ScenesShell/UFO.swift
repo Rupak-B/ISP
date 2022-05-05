@@ -5,8 +5,8 @@ import Igis
 
 class UFO: RenderableEntity, MouseMoveHandler
 { 
-    var ellipse = Ellipse(center:Point(x:0, y:0), radiusX:31, radiusY:41, fillMode:.fillAndStroke)
-    var ellipse2 = Ellipse(center:Point(x:0, y:20), radiusX:81, radiusY:21, fillMode:.fillAndStroke)
+    var ellipse = Ellipse(center:Point(x:0, y:0), radiusX:23, radiusY:27, fillMode:.fillAndStroke)
+    var ellipse2 = Ellipse(center:Point(x:0, y:20), radiusX:60, radiusY:15, fillMode:.fillAndStroke)
     let strokeStyle = StrokeStyle(color:Color(.green))
     let fillStyle = FillStyle(color:Color(.blue))
     let lineWidth = LineWidth(width:5)
