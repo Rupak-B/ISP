@@ -43,14 +43,20 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
         super.init(name:"Ball")
     }
 
+    func colon(canvas:Canvas) {
+        let text = Text(location:Point(x:1000, y:55), text:":")
+        text.font = "50pt Arial"
+        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(text)
+    }
     func renderLabel(canvas:Canvas, patternId:Int) {
-        let text = Text(location:Point(x:975, y:55), text:"\(patternId)")
+        let text = Text(location:Point(x:950, y:55), text:"\(patternId)")
         text.font = "50pt Arial"
         canvas.render(FillStyle(color:Color(.purple)))
         canvas.render(text)
     }
     func renderLabelR(canvas:Canvas, patternIdR:Int) {
-        let text = Text(location:Point(x:1025, y:55), text:"\(patternIdR)")
+        let text = Text(location:Point(x:1035, y:55), text:"\(patternIdR)")
         text.font = "50pt Arial"
         canvas.render(FillStyle(color:Color(.purple)))
         canvas.render(text)
@@ -310,7 +316,7 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
 //            let clearRect = Rect(topLeft:Point(x:0, y:0), size:canvasSize)
   //          let clearRectangle = Rectangle(rect:clearRect, fillMode:.clear)
     //        canvas.render(clearRectangle)
-
+            colon(canvas:canvas)
             switch (leftScore) {
             case 1:
                 renderPattern0(canvas:canvas)
