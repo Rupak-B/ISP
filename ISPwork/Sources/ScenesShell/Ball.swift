@@ -49,6 +49,18 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
         canvas.render(FillStyle(color:Color(.purple)))
         canvas.render(text)
     }
+    func leftWin(canvas:Canvas) {
+        let text = Text(location:Point(x:50, y:450), text:"LEFT PLAYER WINS")
+        text.font = "130pt Arial"
+        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(text)
+    }
+    func rightWin(canvas:Canvas) {
+        let text = Text(location:Point(x:50, y:450), text:"RIGHT PLAYER WINS")
+        text.font = "130pt Arial"
+        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(text)
+    }
     func renderLabel(canvas:Canvas, patternId:Int) {
         let text = Text(location:Point(x:950, y:55), text:"\(patternId)")
         text.font = "50pt Arial"
@@ -306,9 +318,11 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     {
         if stoop == false
         {
+            print("move")
             changeVelocity(velocityX:velocityX, velocityY:velocityY)
         }
         tick += 1
+        //print(tick)
         didRender = false
         if let canvasSize = canvas.canvasSize,  didRender == false
         {
@@ -339,12 +353,14 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
             case 10:
                 renderPattern9(canvas:canvas)
             case 11:
-                tick = 0
-                if tick > 50
-                {
-                    stoop = true
+                //break
+                //tick = 0
+                stoop = true
                 changeVelocity(velocityX:0, velocityY:0)
-                }
+                let clearRect = Rect(topLeft:Point(x:0, y:0), size:canvasSize)
+                let clearRectangle = Rectangle(rect:clearRect, fillMode:.clear)
+                canvas.render(clearRectangle)
+                leftWin(canvas:canvas)
             default:
                 fatalError("Unexpected pattern: \(leftScore)")
             }
@@ -371,12 +387,14 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
             case 10:
                 renderPattern9R(canvas:canvas)
             case 11:
-                tick = 0
-                if tick > 50
-                {
-                    stoop = true
+                //break
+                //tick = 0
+                stoop = true
                 changeVelocity(velocityX:0, velocityY:0)
-                }
+                let clearRect = Rect(topLeft:Point(x:0, y:0), size:canvasSize)
+                let clearRectangle = Rectangle(rect:clearRect, fillMode:.clear)
+                canvas.render(clearRectangle)
+                rightWin(canvas:canvas)
             default:
                 fatalError("Unexpected pattern: \(rightScore)")
             }
