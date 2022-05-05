@@ -10,17 +10,26 @@ class UFO: RenderableEntity, MouseMoveHandler
     let strokeStyle = StrokeStyle(color:Color(.green))
     let fillStyle = FillStyle(color:Color(.blue))
     let lineWidth = LineWidth(width:5)
+
     var didRender = false
+
     var velocityX : Int
     var velocityY : Int
+
     var defaultVelocityX: Int
     var defaultVelocityY: Int
     var doubleVelocityX: Double
     var doubleVelocityY: Double
+
     var defaultRadiusX = 51
     var defaultRadiusY = 51
     var tick = 0
     var x = 0
+    
+    var interactionLayer : InteractionLayer?
+    var projectiles = [Projectile]()
+    var lastShot = 0
+    
     init()
     {
         self.velocityX = 20
@@ -30,6 +39,11 @@ class UFO: RenderableEntity, MouseMoveHandler
         self.doubleVelocityX = 0
         self.doubleVelocityY = 0
         super.init(name:"Ball")
+    }
+
+
+    func setInteractionLayer(layer:InteractionLayer) {
+        self.interactionLayer = layer
     }
 
     func changeVelocity(velocityX:Int, velocityY:Int)
@@ -115,11 +129,25 @@ class UFO: RenderableEntity, MouseMoveHandler
         else {
             velocityY += Int.random(in: 0..<2)
         }
-//        if velocityX > 2 {
-        //    let pro1 = Projectile(velocityY: 20, rectangle : Rect)
-      //      pro1.setTopLeft(value: Point(x: 100, y: 100))
-    //        pro1.setVelocityX(value: 2)
-      //      InteractionLayer.renderprojectileExample(projectileExample: pro1)
+        
+        if lastShot <= 0 {
+            let pro1 = Projectile(velocityY: 20, rectangle : Rectangle(rect:Rect(topLeft:Point(x:ellipse.center.x, y:ellipse.center.y + 20), size: Size(width:6, height: 20))))
+            projectiles.append(pro1)
+            if let interactionLayer = interactionLayer {                
+                interactionLayer.renderprojectileExample(projectileExample: pro1)
+            }
+            lastShot = 60
+        } else {
+            lastShot -= 1
+        }
+
+        for pro in projectiles {
+            if pro.remove {
+                if let interactionLayer = interactionLayer {
+                    interactionLayer.removeEntity(entity:pro)
+                }
+            }
+        }
   //      }
 
         /*        func growRadius(radius: inout Int, defaultRadius: Int){

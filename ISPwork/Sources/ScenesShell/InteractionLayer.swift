@@ -1,3 +1,4 @@
+
 import Scenes
 import Igis
 
@@ -27,6 +28,9 @@ class InteractionLayer : Layer, KeyDownHandler {
 
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Interaction")
+
+        ufo.setInteractionLayer(layer:self)
+        ufo3.setInteractionLayer(layer:self)
 
         // We insert our RenderableEntities in the constructor
         insert(entity: background, at:.back)
