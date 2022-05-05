@@ -8,7 +8,7 @@ import Igis
  */
 
 
-class InteractionLayer : Layer, KeyDownHandler {
+class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
 
     let projectileExample : Projectile
     let ufo = UFO()
@@ -66,27 +66,43 @@ func renderprojectileExample(projectileExample:Projectile) {
         paddleRight.move(to:Point(x: 1875, y: 480))
         projectileExample.move(to:Point(x: 500, y:200))
         dispatcher.registerKeyDownHandler(handler: self)
+        dispatcher.registerKeyUpHandler(handler: self)
 
     }
+
+    var keysDown = [String]()
 
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)
     {
         let tlpl = paddleLeft.rectangle.rect.topLeft
         let tlpr = paddleRight.rectangle.rect.topLeft
-        switch key
-        {
-        case "w":
-            paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
-        case "s":
-            paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
-        case "ArrowUp":
-            paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
-        case "ArrowDown":
-            paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
-        default:
-            break
+
+        if !keysDown.contains(key) {
+            keysDown.append(key)
         }
 
+        for k in keysDown {        
+            switch k
+            {
+            case "w":
+                paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
+            case "s":
+                paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
+            case "ArrowUp":
+                paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
+            case "ArrowDown":
+                paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
+            default:
+                break
+            }
+        }
+
+    }
+
+    func onKeyUp(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
+        if keysDown.contains(key) {
+            keysDown = keysDown.filter { $0 != key }
+        }
     }
 
     override func postTeardown()
@@ -94,6 +110,7 @@ func renderprojectileExample(projectileExample:Projectile) {
         tick += 1
         print(tick)
         dispatcher.unregisterKeyDownHandler(handler: self)
+        dispatcher.unregisterKeyUpHandler(handler: self)
     }
     
 }
