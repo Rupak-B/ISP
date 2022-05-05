@@ -12,9 +12,9 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
 
     let projectileExample : Projectile
     let ufo = UFO()
-    let ufo3 = UFO()
-    let ufo4 = UFO()
     let ufo5 = UFO()
+    let ufo4 = UFO()
+    let ufo3 = UFO()
     let alien = Alien()
     let ufo2 = UFO2()
     var tick = 0
@@ -33,7 +33,8 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
 
         ufo.setInteractionLayer(layer:self)
         ufo3.setInteractionLayer(layer:self)
-
+        ufo4.setInteractionLayer(layer:self)
+        ufo5.setInteractionLayer(layer:self) 
         // We insert our RenderableEntities in the constructor
         insert(entity: background, at:.back)
         insert(entity: moon, at: .front)
