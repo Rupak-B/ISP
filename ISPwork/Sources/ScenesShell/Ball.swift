@@ -17,14 +17,14 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     var doubleVelocityY: Double
     var defaultRadiusX = 26
     var defaultRadiusY = 26
-
+    
     let maxPattern = 11
     var leftScore = 1
     var rightScore = 1
     var rect: Rect?
 
-    let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:100)))
-    let paddleRight = Paddle(rect:Rect(size:Size(width:10, height:100)))
+    static let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:100)))
+    static let paddleRight = Paddle(rect:Rect(size:Size(width:10, height:100)))
 
     var tick = 0
 
@@ -38,6 +38,7 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
         self.defaultVelocityY = 10
         self.doubleVelocityX = 0
         self.doubleVelocityY = 0
+        
 
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Ball")
@@ -146,13 +147,15 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     override func calculate(canvasSize: Size)
     {
         // First, move to the new position
-        ellipse.center += Point(x:velocityX, y:velocityY)
 
+        ellipse.center += Point(x:velocityX/2, y:velocityY/2)
+        
+        
         // Form a bounding rectangle around the canvas
         let canvasBoundingRect = Rect(size:canvasSize)
 
-        let paddleLeftBoundingRect = paddleLeft.rectangle.rect
-        let paddleRightBoundingRect = paddleRight.rectangle.rect
+        let paddleLeftBoundingRect = Ball.paddleLeft.rectangle.rect
+        let paddleRightBoundingRect = Ball.paddleRight.rectangle.rect
         // Form a bounding rect around the ball (ellipse)
         let ballBoundingRect = Rect(topLeft:Point(x:ellipse.center.x-ellipse.radiusX, y:ellipse.center.y-ellipse.radiusY), size:Size(width:ellipse.radiusX*2, height:ellipse.radiusY*2))
 
@@ -260,18 +263,18 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     }
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)
     {
-        let tlpl = paddleLeft.rectangle.rect.topLeft
-        let tlpr = paddleRight.rectangle.rect.topLeft
+        let tlpl = Ball.paddleLeft.rectangle.rect.topLeft
+        let tlpr = Ball.paddleRight.rectangle.rect.topLeft
         switch key
         {
         case "w":
-            paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
+            Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
         case "s":
-            paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
+            Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
         case "ArrowUp":
-            paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
+            Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
         case "ArrowDown":
-            paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
+            Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
         default:
             break
         }
@@ -287,8 +290,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
 
         dispatcher.registerKeyDownHandler(handler: self)
 
-        paddleLeft.move(to:Point(x: 50, y: 480))
-        paddleRight.move(to:Point(x: 1850, y: 480))
+        Ball.paddleLeft.move(to:Point(x: 50, y: 480))
+        Ball.paddleRight.move(to:Point(x: 1850, y: 480))
     }
 
     override func teardown()

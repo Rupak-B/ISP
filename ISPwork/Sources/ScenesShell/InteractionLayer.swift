@@ -19,11 +19,11 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
     let ufo2 = UFO2()
     var tick = 0
     let moon = Moon()
-    let ball = Ball()
+    static let ball = Ball()
     let background = Background()
 
-    let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:150)))
-    let paddleRight = Paddle(rect:Rect(size:Size(width:10, height:150)))
+    static let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:150)))
+    static let paddleRight = Paddle(rect:Rect(size:Size(width:10, height:150)))
 
     init() {
         self.projectileExample = Projectile(velocityY : 3, rectangle: Rectangle(rect:Rect(topLeft: Point(), size:Size(width: 4, height: 30)), fillMode: .fill))
@@ -52,12 +52,12 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
         insert(entity: ufo2, at: .front)
         ufo2.changeVelocity(velocityX: -20, velocityY: 12)
 
-        ball.changeVelocity(velocityX: 15, velocityY: 10)
+        InteractionLayer.ball.changeVelocity(velocityX: 15, velocityY: 10)
 
-        insert(entity: ball, at: .front)
+        insert(entity: InteractionLayer.ball, at: .front)
 
-        insert(entity: paddleLeft, at: .front)
-        insert(entity: paddleRight, at: .front)
+        insert(entity: InteractionLayer.paddleLeft, at: .front)
+        insert(entity: InteractionLayer.paddleRight, at: .front)
     }
 func renderprojectileExample(projectileExample:Projectile) {
         insert(entity:projectileExample, at:.front)
@@ -69,8 +69,8 @@ func renderprojectileExample(projectileExample:Projectile) {
 
     override func preSetup(canvasSize: Size, canvas: Canvas)
     {
-        paddleLeft.move(to:Point(x: 20, y: 480))
-        paddleRight.move(to:Point(x: 1875, y: 480))
+        InteractionLayer.paddleLeft.move(to:Point(x: 20, y: 480))
+        InteractionLayer.paddleRight.move(to:Point(x: 1875, y: 480))
           //        projectileExample.move(to:Point(x: 500, y:200))
         dispatcher.registerKeyDownHandler(handler: self)
         dispatcher.registerKeyUpHandler(handler: self)
@@ -81,8 +81,8 @@ func renderprojectileExample(projectileExample:Projectile) {
 
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)
     {
-        let tlpl = paddleLeft.rectangle.rect.topLeft
-        let tlpr = paddleRight.rectangle.rect.topLeft
+        let tlpl = InteractionLayer.paddleLeft.rectangle.rect.topLeft
+        let tlpr = InteractionLayer.paddleRight.rectangle.rect.topLeft
 
         if !keysDown.contains(key) {
             keysDown.append(key)
@@ -92,13 +92,13 @@ func renderprojectileExample(projectileExample:Projectile) {
             switch k
             {
             case "w":
-                paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
+                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
             case "s":
-                paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
+                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
             case "ArrowUp":
-                paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
+                InteractionLayer.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
             case "ArrowDown":
-                paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
+                InteractionLayer.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
             default:
                 break
             }
