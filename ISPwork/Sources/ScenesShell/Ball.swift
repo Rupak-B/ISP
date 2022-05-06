@@ -318,7 +318,6 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     {
         if stoop == false
         {
-            print("move")
             changeVelocity(velocityX:velocityX, velocityY:velocityY)
         }
         tick += 1
@@ -395,6 +394,7 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
                 let clearRectangle = Rectangle(rect:clearRect, fillMode:.clear)
                 canvas.render(clearRectangle)
                 rightWin(canvas:canvas)
+                self.velocityX = 10000000000000
             default:
                 fatalError("Unexpected pattern: \(rightScore)")
             }
