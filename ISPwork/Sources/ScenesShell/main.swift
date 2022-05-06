@@ -5,7 +5,7 @@ import Igis
  the Director.
  It rarely needs to be altered.
  */
-print("Starting...")
+print("Starting Up Hee Hee Hoo Hoo...")
 do {
     let igis = Igis()
     try igis.run(painterType:ShellDirector.self)
