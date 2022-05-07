@@ -19,8 +19,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
     var defaultRadiusY = 26
     
     let maxPattern = 11
-    var leftScore = 0
-    var rightScore = 0
+    var leftScore = 1
+    var rightScore = 1
     var rect: Rect?
 
     static let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:100)))
