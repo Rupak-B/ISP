@@ -17,7 +17,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
     var doubleVelocityY: Double
     var defaultRadiusX = 26
     var defaultRadiusY = 26
-    
+
+    var time = 1
     let maxPattern = 11
     var leftScore = 1
     var rightScore = 1
@@ -270,8 +271,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
         // Position the ellipse at the center of the canvas
         ellipse.center = canvasSize.center
         rect = Rect(size: canvasSize)
-        Ball.paddleLeft.move(to:Point(x: 50, y: 480))
-        Ball.paddleRight.move(to:Point(x: 1850, y: 480))
+//        Ball.paddleLeft.move(to:Point(x: 50, y: 480))
+       // Ball.paddleRight.move(to:Point(x: 1850, y: 480))
 
         dispatcher.registerMouseMoveHandler(handler:self)
         dispatcher.registerKeyDownHandler(handler: self)
@@ -294,13 +295,17 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
             switch k
             {
             case "w":
-                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
+tick += 1
+           //     Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
             case "s":
-                Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
+tick += 1
+         //       Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
             case "ArrowUp":
-               Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
+tick += 1
+         //       Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
             case "ArrowDown":
-                Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
+tick += 1
+           //     Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
             default:
                 break
             }
@@ -347,6 +352,7 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
         }
         tick += 1
         //print(tick)
+time += 1
         didRender = false
         if let canvasSize = canvas.canvasSize,  didRender == false
         {
