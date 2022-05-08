@@ -2,7 +2,7 @@ import Foundation
 import Scenes
 import Igis
 
-class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
+class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
     var ellipse = Ellipse(center:Point(x:0, y:0), radiusX:26, radiusY:26, fillMode:.fillAndStroke)
     let strokeStyle = StrokeStyle(color:Color(.orange))
     let fillStyle = FillStyle(color:Color(.red))
@@ -261,26 +261,10 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
         growRadius(radius: &ellipse.radiusX, defaultRadius:defaultRadiusX)
         growRadius(radius: &ellipse.radiusY, defaultRadius:defaultRadiusY)
     }
-    func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)
-    {
-        let tlpl = Ball.paddleLeft.rectangle.rect.topLeft
-        let tlpr = Ball.paddleRight.rectangle.rect.topLeft
-        switch key
-        {
-        case "w":
-            Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
-        case "s":
-            Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
-        case "ArrowUp":
-            Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
-        case "ArrowDown":
-            Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
-        default:
-            break
-        }
 
-    }
-    override func setup(canvasSize: Size, canvas: Canvas)
+    
+
+   override func setup(canvasSize: Size, canvas: Canvas)
     {
 //        canvas.setup(mm)
         // Position the ellipse at the center of the canvas
@@ -289,10 +273,48 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler{
         dispatcher.registerMouseMoveHandler(handler:self)
 
         dispatcher.registerKeyDownHandler(handler: self)
-
+        dispatcher.registerKeyUpHandler(handler: self)
         Ball.paddleLeft.move(to:Point(x: 50, y: 480))
         Ball.paddleRight.move(to:Point(x: 1850, y: 480))
     }
+    var keypDown = [String]()
+
+    func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)
+    {
+        print(keypDown)
+        let tlpl = InteractionLayer.paddleLeft.rectangle.rect.topLeft
+        let tlpr = InteractionLayer.paddleRight.rectangle.rect.topLeft
+
+        if !keypDown.contains(key) {
+            keypDown.append(key)
+            
+        }
+
+        for k in keypDown {        
+            switch k
+            {
+            case "w":
+                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
+            case "s":
+                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
+            case "ArrowUp":
+                InteractionLayer.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
+            case "ArrowDown":
+                InteractionLayer.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
+            default:
+                break
+            }
+        }
+
+    }
+
+   func onKeyUp(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool) {
+
+      if keypDown.contains(key) {
+            keypDown = keypDown.filter { $0 != key }
+        }
+    }
+
 
     override func teardown()
     {

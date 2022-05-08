@@ -9,6 +9,7 @@ class Projectile : RenderableEntity {
     var remove = false
     let velocityY : Int
     let fillStyle = FillStyle(color:Color(.red))
+    var score = 1
     
     init(velocityY: Int, rectangle : Rectangle) {
         self.velocityY = velocityY
@@ -34,6 +35,7 @@ class Projectile : RenderableEntity {
             if rectangle.rect.topLeft.y >= canvasSize.height {
                 // can be removed
                 remove = true
+                score += 1
             }
 
             // if projectile is above top of canvas

@@ -81,6 +81,7 @@ func renderprojectileExample(projectileExample:Projectile) {
 
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)
     {
+        print(keysDown) 
         let tlpl = InteractionLayer.paddleLeft.rectangle.rect.topLeft
         let tlpr = InteractionLayer.paddleRight.rectangle.rect.topLeft
 
@@ -114,6 +115,7 @@ func renderprojectileExample(projectileExample:Projectile) {
 
     override func postTeardown()
     {
+
         tick += 1
     //    print(tick)
         dispatcher.unregisterKeyDownHandler(handler: self)
