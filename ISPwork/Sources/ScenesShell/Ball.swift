@@ -270,12 +270,12 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
         // Position the ellipse at the center of the canvas
         ellipse.center = canvasSize.center
         rect = Rect(size: canvasSize)
-        dispatcher.registerMouseMoveHandler(handler:self)
-
-        dispatcher.registerKeyDownHandler(handler: self)
-        dispatcher.registerKeyUpHandler(handler: self)
         Ball.paddleLeft.move(to:Point(x: 50, y: 480))
         Ball.paddleRight.move(to:Point(x: 1850, y: 480))
+
+        dispatcher.registerMouseMoveHandler(handler:self)
+        dispatcher.registerKeyDownHandler(handler: self)
+        dispatcher.registerKeyUpHandler(handler: self)
     }
     var keypDown = [String]()
 
@@ -294,7 +294,7 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
             switch k
             {
             case "w":
-                Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
+                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
             case "s":
                 Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
             case "ArrowUp":
@@ -415,9 +415,9 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
                 //tick = 0
                 stoop = true
                 changeVelocity(velocityX:0, velocityY:0)
-                let clearRect = Rect(topLeft:Point(x:0, y:0), size:canvasSize)
-                let clearRectangle = Rectangle(rect:clearRect, fillMode:.clear)
-                canvas.render(clearRectangle)
+//                let clearRect = Rect(topLeft:Point(x:0, y:0), size:canvasSize)
+  //              let clearRectangle = Rectangle(rect:clearRect, fillMode:.clear)
+    //            canvas.render(clearRectangle)
                 rightWin(canvas:canvas)
                 self.velocityX = 10000000000000
             default:
