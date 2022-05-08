@@ -282,8 +282,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)
     {
         print(keypDown)
-        let tlpl = InteractionLayer.paddleLeft.rectangle.rect.topLeft
-        let tlpr = InteractionLayer.paddleRight.rectangle.rect.topLeft
+        let tlpl = Ball.paddleLeft.rectangle.rect.topLeft
+        let tlpr = Ball.paddleRight.rectangle.rect.topLeft
 
         if !keypDown.contains(key) {
             keypDown.append(key)
@@ -294,13 +294,13 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
             switch k
             {
             case "w":
-                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
+                Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y - 25))
             case "s":
-                InteractionLayer.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
+                Ball.paddleLeft.move(to:Point(x: tlpl.x, y:tlpl.y + 25))
             case "ArrowUp":
-                InteractionLayer.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
+               Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y - 25))
             case "ArrowDown":
-                InteractionLayer.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
+                Ball.paddleRight.move(to:Point(x: tlpr.x, y:tlpr.y + 25))
             default:
                 break
             }
