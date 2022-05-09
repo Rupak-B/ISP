@@ -37,27 +37,27 @@ class Background : RenderableEntity {
     }
 
     override func render(canvas:Canvas) {
-        if (animationFrame >= 90) {
+        if (animationFrame >= 180) {
             animationFrame = 0
         }
-        if (animationFrame / 30 < 1) {
+        if (animationFrame / 60 == 1) {
             if (backround1.isReady) {
-                backround1.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1600, height:800)))
+                backround1.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1900, height:1000)))
                 canvas.render(backround1)
             }
         }
-        else if(animationFrame / 30 > 1) {
+        else if(animationFrame / 60 == 2) {
             if (backround2.isReady) {
-                backround2.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1600, height:800)))           }
+                backround2.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1900, height:1000)))           }
         }
         else {
             if (backround3.isReady) {
-                backround3.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1600, height:800)))
+                backround3.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1900, height:1000)))
                 canvas.render(backround3)
             }
         }
         animationFrame += 1
-        print(animationFrame)
+//        print(animationFrame)
     }
 }
 
