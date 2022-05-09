@@ -27,6 +27,8 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
     static let paddleLeft = Paddle(rect:Rect(size:Size(width:10, height:100)))
     static let paddleRight = Paddle(rect:Rect(size:Size(width:10, height:100)))
 
+    static var projectiles = [Projectile]()
+
     var tick = 0
 
     var stoop = false
@@ -43,6 +45,14 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
 
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Ball")
+    }
+
+    static func addProjectile(projectile: Projectile) {
+        projectiles.append(projectile)
+    }
+
+    static func removeProjectile(projectile: Projectile) {
+        projectiles = projectiles.filter { $0 != projectile }
     }
 
     func colon(canvas:Canvas) {
@@ -175,7 +185,16 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
         let contactpaddleLeft = (ballBoundingRect.topLeft.x <= paddleLeftBoundingRect.topRight.x-25) && ((paddleLeftBoundingRect.topLeft.y-55 < ballBoundingRect.topLeft.y) && (paddleLeftBoundingRect.bottomLeft.y+55 > ballBoundingRect.bottomLeft.y))
         let contactpaddleRight = (ballBoundingRect.topLeft.x >= paddleRightBoundingRect.topRight.x-45) && ((paddleRightBoundingRect.topLeft.y-55 < ballBoundingRect.topLeft.y) && (paddleRightBoundingRect.bottomLeft.y+55 > ballBoundingRect.bottomLeft.y))
         
-//        print(paddleLeftBoundingRect.topLeft.y)
+        //        print(paddleLeftBoundingRect.topLeft.y)
+
+        for projectile in Ball.projectiles {
+            let center = projectile.rectangle.rect.center
+            if(Int(sqrt(pow(Double(center.x - ellipse.center.x), 2) + pow(Double(center.y - ellipse.center.y), 2))) < Int(Double(ellipse.radiusX) * 1.5)) {
+                print("contactProjectile")
+                velocityX *= -3
+                velocityY *= 3
+            }
+        }
         
         if contactpaddleRight {
             if velocityX >= 0 {

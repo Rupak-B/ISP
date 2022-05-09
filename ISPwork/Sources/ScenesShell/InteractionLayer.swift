@@ -59,12 +59,15 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
         insert(entity: InteractionLayer.paddleLeft, at: .front)
         insert(entity: InteractionLayer.paddleRight, at: .front)
     }
-func renderprojectileExample(projectileExample:Projectile) {
+    
+    func renderprojectileExample(projectileExample:Projectile) {
         insert(entity:projectileExample, at:.front)
+        Ball.addProjectile(projectile:projectileExample)
     }
    
-    func removeEntity(entity: RenderableEntity) {
+    func removeEntity(entity: Projectile) {
         remove(entity: entity)
+        Ball.removeProjectile(projectile:entity)
     }
 
     override func preSetup(canvasSize: Size, canvas: Canvas)
