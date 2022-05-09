@@ -11,10 +11,10 @@ import Igis
 class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
 
      let projectileExample : Projectile
-     let ufo = UFO()
-     let ufo5 = UFO()
-     let ufo4 = UFO()
-     let ufo3 = UFO()
+   static  let ufo = UFO()
+     static let ufo5 = UFO()
+    static let ufo4 = UFO()
+     static let ufo3 = UFO()
     static let alien = Alien()
     static let ufo2 = UFO2()
     var tick = 0
@@ -31,26 +31,26 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Interaction")
 
-        ufo.setInteractionLayer(layer:self)
-        ufo3.setInteractionLayer(layer:self)
-       ufo4.setInteractionLayer(layer:self)
-        ufo5.setInteractionLayer(layer:self) 
+        InteractionLayer.ufo.setInteractionLayer(layer:self)
+        InteractionLayer.ufo3.setInteractionLayer(layer:self)
+        InteractionLayer.ufo4.setInteractionLayer(layer:self)
+        InteractionLayer.ufo5.setInteractionLayer(layer:self) 
         // We insert our RenderableEntities in the constructor
         insert(entity: background, at:.back)
         insert(entity: moon, at: .front)
-        insert(entity:  ufo5, at: .front)
-        insert(entity:  ufo3, at: .front)
-        insert(entity:  ufo4, at: .front)
-        insert(entity:  ufo, at: .front) 
+
+        insert(entity:  InteractionLayer.ufo3, at: .front)
+        insert(entity:  InteractionLayer.ufo4, at: .front)
+        insert(entity:  InteractionLayer.ufo, at: .front) 
         insert(entity:  InteractionLayer.alien, at: .front)
         InteractionLayer.alien.changeVelocity(velocityX: 26, velocityY: 12)
-        ufo.changeVelocity(velocityX: 26, velocityY: 12)
-        ufo3.changeVelocity(velocityX: 26, velocityY: 12)
-        ufo4.changeVelocity(velocityX: 36, velocityY: 12)
-        ufo5.changeVelocity(velocityX: 16, velocityY: 2)
+        InteractionLayer.ufo.changeVelocity(velocityX: 26, velocityY: 12)
+        InteractionLayer.ufo3.changeVelocity(velocityX: 26, velocityY: 12)
+        InteractionLayer.ufo4.changeVelocity(velocityX: 36, velocityY: 12)
+
         insert(entity: projectileExample, at: .front)
-        insert(entity:  InteractionLayer.ufo2, at: .front)
-        InteractionLayer.ufo2.changeVelocity(velocityX: -20, velocityY: 12)
+//        insert(entity:  InteractionLayer.ufo2, at: .front)
+  //      InteractionLayer.ufo2.changeVelocity(velocityX: -20, velocityY: 12)
 
         InteractionLayer.ball.changeVelocity(velocityX: 15, velocityY: 10)
 

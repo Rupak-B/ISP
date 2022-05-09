@@ -59,8 +59,8 @@ class UFO: RenderableEntity, MouseMoveHandler
     override func calculate(canvasSize: Size)
     {
         // First, move to the new position
-        ellipse.center += Point(x:velocityX, y:velocityY)
-        ellipse2.center += Point(x:velocityX, y:velocityY)
+        ellipse.center += Point(x:velocityX/2, y:velocityY/2)
+        ellipse2.center += Point(x:velocityX/2, y:velocityY/2)
         // Form a bounding rectangle around the canvas
         let canvasBoundingRect = Rect(size:canvasSize)
 
@@ -109,11 +109,11 @@ class UFO: RenderableEntity, MouseMoveHandler
         }
         // enact cosine wave math
         if ellipse.center.x  > 900 {
-            velocityX -= Int.random(in: 0..<4)
+            velocityX -= Int.random(in: 0..<3)
         }
 
         else {
-            velocityX += Int.random(in: 0..<4)
+            velocityX += Int.random(in: 0..<3)
         }
         if ellipse.center.x  ==  900{
             if tick > 700{
@@ -122,12 +122,12 @@ class UFO: RenderableEntity, MouseMoveHandler
             }
         }
 
-        if ellipse.center.y  > 400 {
-            velocityY -= Int.random(in: 0..<2)
+        if ellipse.center.y  > 300 {
+            velocityY -= Int.random(in: 0..<3)
 
         }
         else {
-            velocityY += Int.random(in: 0..<2)
+            velocityY += Int.random(in: 0..<3)
         }
         
         if lastShot <= 0 {
