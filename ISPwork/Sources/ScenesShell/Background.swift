@@ -1,43 +1,64 @@
+import Foundation
 import Scenes
 import Igis
-import Foundation
-  /*
-     This class is responsible for rendering the background.
-   */
+
+/*
+
+ This class is responsible for rendering the background.
+ */
 
 
-class Background : RenderableEntity, MouseMoveHandler {
+class Background : RenderableEntity {
 
-    let mm: Image
+    var animationFrame = 0
+
+    let backround1 : Image
+    let backround2 : Image
+    let backround3 : Image
+
     init() {
-        guard let mmURL = URL(string:"https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/ece60cc31aeebda.png")
-        else
-        {
-            fatalError("Failed to create URL for symbol")
-        }
-        mm = Image(sourceURL:mmURL)
-          // Using a meaningful name can be helpful for debugging
-          super.init(name:"Background")
-    }
-    override func setup(canvasSize:Size, canvas: Canvas)
-    {
-        canvas.setup(mm)
-        dispatcher.registerMouseMoveHandler(handler:self)
-    }
-    override func teardown()
-    {
-        dispatcher.unregisterMouseMoveHandler(handler:self)
-    }
-    func onMouseMove(globalLocation: Point, movement: Point) {}
-    override func render(canvas:Canvas)
-    {
-        if let canvasSize = canvas.canvasSize
-        {
-            if mm.isReady
-            {
-                mm.renderMode = .destinationRect(Rect(topLeft:Point(x:0, y:0), size:Size(width:1950, height:1000)))
+
+        func getImage(url:String) -> Image {
+            guard let url = URL(string:url) else {
+                fatalError("Failed to create URL for "+url)
             }
-            canvas.render(mm)
+            return Image(sourceURL:url)
         }
+
+        backround1 = getImage(url :"https://codermerlin.com/users/logan-mueller/backround1.jpeg")
+        backround2 = getImage(url :"https://codermerlin.com/users/logan-mueller/backround2.jpg")
+        backround3 = getImage(url :"https://codermerlin.com/users/logan-mueller/backround3.jpeg")
+        super.init(name:"Background")
+
+    }
+
+    override func setup (canvasSize: Size, canvas:Canvas) {
+        canvas.setup(backround1, backround2, backround3)
+    }
+
+    override func render(canvas:Canvas) {
+        if (animationFrame >= 90) {
+            animationFrame = 0
+        }
+        if (animationFrame / 30 < 1) {
+            if (backround1.isReady) {
+                backround1.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1600, height:800)))
+                canvas.render(backround1)
+            }
+        }
+        else if(animationFrame / 30 > 1) {
+            if (backround2.isReady) {
+                backround2.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1600, height:800)))           }
+        }
+        else {
+            if (backround3.isReady) {
+                backround3.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1600, height:800)))
+                canvas.render(backround3)
+            }
+        }
+        animationFrame += 1
+        print(animationFrame)
     }
 }
+
+ 
