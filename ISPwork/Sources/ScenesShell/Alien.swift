@@ -96,7 +96,7 @@ var x = 0
        velocityY += 1     
         if ellipse.center.y  > 900 {
             if timer == 0 {
-            velocityY += -40
+            velocityY += -30
  timer = 70
             }
             else {

@@ -43,7 +43,7 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
         insert(entity:  InteractionLayer.ufo4, at: .front)
         insert(entity:  InteractionLayer.ufo, at: .front) 
         insert(entity:  InteractionLayer.alien, at: .front)
-        InteractionLayer.alien.changeVelocity(velocityX: 26, velocityY: 12)
+        InteractionLayer.alien.changeVelocity(velocityX: 15, velocityY: 12)
         InteractionLayer.ufo.changeVelocity(velocityX: 26, velocityY: 12)
         InteractionLayer.ufo3.changeVelocity(velocityX: 26, velocityY: 12)
         InteractionLayer.ufo4.changeVelocity(velocityX: 36, velocityY: 12)

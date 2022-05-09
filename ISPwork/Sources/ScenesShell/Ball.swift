@@ -48,31 +48,31 @@ class Ball: RenderableEntity, MouseMoveHandler, KeyDownHandler, KeyUpHandler {
     func colon(canvas:Canvas) {
         let text = Text(location:Point(x:1000, y:55), text:":")
         text.font = "50pt Arial"
-        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(FillStyle(color:Color(.red)))
         canvas.render(text)
     }
     func leftWin(canvas:Canvas) {
         let text = Text(location:Point(x:50, y:450), text:"LEFT PLAYER WINS")
         text.font = "130pt Arial"
-        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(FillStyle(color:Color(.red)))
         canvas.render(text)
     }
     func rightWin(canvas:Canvas) {
         let text = Text(location:Point(x:50, y:450), text:"RIGHT PLAYER WINS")
         text.font = "130pt Arial"
-        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(FillStyle(color:Color(.red)))
         canvas.render(text)
     }
     func renderLabel(canvas:Canvas, patternId:Int) {
         let text = Text(location:Point(x:950, y:55), text:"\(patternId)")
         text.font = "50pt Arial"
-        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(FillStyle(color:Color(.red)))
         canvas.render(text)
     }
     func renderLabelR(canvas:Canvas, patternIdR:Int) {
         let text = Text(location:Point(x:1035, y:55), text:"\(patternIdR)")
         text.font = "50pt Arial"
-        canvas.render(FillStyle(color:Color(.purple)))
+        canvas.render(FillStyle(color:Color(.red)))
         canvas.render(text)
     }
     func renderPattern0(canvas:Canvas) {
