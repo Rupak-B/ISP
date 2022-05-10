@@ -26,7 +26,7 @@ class Background : RenderableEntity {
         }
 
         backround1 = getImage(url :"https://codermerlin.com/users/logan-mueller/backround1.jpeg")
-        backround2 = getImage(url :"https://codermerlin.com/users/logan-mueller/backround2.jpg")
+        backround2 = getImage(url :"https://upload.wikimedia.org/wikipedia/commons/9/94/Space_night_sky.jpg")
         backround3 = getImage(url :"https://codermerlin.com/users/logan-mueller/backround3.jpeg")
         super.init(name:"Background")
 
@@ -49,7 +49,9 @@ class Background : RenderableEntity {
         else if(animationFrame / 100 == 2) {
             if (backround2.isReady) {
                 backround2.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1900, height:1000)))           }
+            canvas.render(backround2)
         }
+        
         else {
             if (backround3.isReady) {
                 backround3.renderMode = .destinationRect(Rect(topLeft:Point(x:0,y:0), size:Size( width:1900, height:1000)))
