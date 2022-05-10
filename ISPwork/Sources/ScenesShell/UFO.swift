@@ -74,23 +74,17 @@ class UFO: RenderableEntity, MouseMoveHandler
         let tooFarUp = ballBoundingRect.topLeft.y <= canvasBoundingRect.topLeft.y
         let tooFarDown = ballBoundingRect.bottomLeft.y + ballBoundingRect.size.height >= canvasBoundingRect.topLeft.y + canvasBoundingRect.size.height
 
-        /* // Bounce horizontally
-           if !containment.intersection([.overlapsRight, .beyondRight]).isEmpty && velocityX > 0 ||
-           !containment.intersection([.overlapsLeft, .beyondLeft]).isEmpty && velocityX < 0 {
-           velocityX *= -2
-           }
-         */
 
         if tooFarLeft || tooFarRight{
             velocityX *= 0
             //taking a property of the ellipse object, radiusX, and we're changing it
-            //          ellipse.radiusX = ellipse.radiusX/2
+
         }
 
 
         if tooFarUp || tooFarDown{
             velocityY = 0
-            //            ellipse.radiusY = ellipse.radiusY/2
+
         }
         func slowDown(velocity: inout Int, defaultVelocity: Int, doubleVelocity: inout Double){
             doubleVelocity = Double(velocity)
@@ -136,7 +130,7 @@ class UFO: RenderableEntity, MouseMoveHandler
             if let interactionLayer = interactionLayer {                
                 interactionLayer.renderprojectileExample(projectileExample: pro1)
             }
-            lastShot = 60
+            lastShot = 120
         } else {
             lastShot -= 1
         }
@@ -148,25 +142,6 @@ class UFO: RenderableEntity, MouseMoveHandler
                 }
             }
         }
-  //      }
-
-        /*        func growRadius(radius: inout Int, defaultRadius: Int){
-                  if radius < defaultRadius{
-                  var change = 5
-                  if Double(radius).sign == .minus{
-                  change = -5
-                  }
-                  radius += change
-                  }
-                  else if radius > defaultRadius{
-                  radius = defaultRadius
-                  }
-                  }
-                  //       slowDown(velocity: &velocityX, defaultVelocity:defaultVelocityX, doubleVelocity: &doubleVelocityX)
-                  //     slowDown(velocity: &velocityY, defaultVelocity:defaultVelocityY, doubleVelocity: &doubleVelocityY)
-                  // growRadius(radius: &ellipse.radiusX, defaultRadius:defaultRadiusX)
-                  // growRadius(radius: &ellipse.radiusY, defaultRadius:defaultRadiusY)
-         */
     }
     override func setup(canvasSize: Size, canvas: Canvas)
     {
