@@ -49,8 +49,8 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
         InteractionLayer.ufo4.changeVelocity(velocityX: 36, velocityY: 12)
 
         insert(entity: projectileExample, at: .front)
-//        insert(entity:  InteractionLayer.ufo2, at: .front)
-  //      InteractionLayer.ufo2.changeVelocity(velocityX: -20, velocityY: 12)
+        insert(entity:  InteractionLayer.ufo2, at: .front)
+        InteractionLayer.ufo2.changeVelocity(velocityX: -20, velocityY: 12)
 
         InteractionLayer.ball.changeVelocity(velocityX: 15, velocityY: 10)
 
@@ -59,12 +59,12 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
         insert(entity: InteractionLayer.paddleLeft, at: .front)
         insert(entity: InteractionLayer.paddleRight, at: .front)
     }
-    
+    // Responsible for contact between Ball and Projectile as well as rendering the projectile
     func renderprojectileExample(projectileExample:Projectile) {
         insert(entity:projectileExample, at:.front)
         Ball.addProjectile(projectile:projectileExample)
     }
-   
+   // Used to remove the laser when it leaves the screen
     func removeEntity(entity: Projectile) {
         remove(entity: entity)
         Ball.removeProjectile(projectile:entity)
@@ -81,7 +81,7 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
         dispatcher.registerKeyUpHandler(handler: self)
 
     }
-
+//Controls for the shadow and real paddle
     var keysDown = [String]()
 
     func onKeyDown(key:String, code:String, ctrlKey:Bool, shiftKey:Bool, altKey:Bool, metaKey:Bool)

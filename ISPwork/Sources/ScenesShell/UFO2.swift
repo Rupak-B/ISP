@@ -5,8 +5,9 @@ import Igis
 
 class UFO2: RenderableEntity, MouseMoveHandler
 { 
-    var ellipse = Ellipse(center:Point(x:0, y:0), radiusX:31, radiusY:41, fillMode:.fillAndStroke)
-    var ellipse2 = Ellipse(center:Point(x:0, y:20), radiusX:81, radiusY:21, fillMode:.fillAndStroke)
+//declare variables
+    var ellipse = Ellipse(center:Point(x:0, y:0), radiusX:11, radiusY:21, fillMode:.fillAndStroke)
+    var ellipse2 = Ellipse(center:Point(x:0, y:20), radiusX:31, radiusY:10, fillMode:.fillAndStroke)
     let strokeStyle = StrokeStyle(color:Color(.yellow))
     let fillStyle = FillStyle(color:Color(.green))
     let lineWidth = LineWidth(width:5)
@@ -60,40 +61,19 @@ class UFO2: RenderableEntity, MouseMoveHandler
         let tooFarUp = ballBoundingRect.topLeft.y <= canvasBoundingRect.topLeft.y
         let tooFarDown = ballBoundingRect.bottomLeft.y + ballBoundingRect.size.height >= canvasBoundingRect.topLeft.y + canvasBoundingRect.size.height
 
-        /* // Bounce horizontally
-           if !containment.intersection([.overlapsRight, .beyondRight]).isEmpty && velocityX > 0 ||
-           !containment.intersection([.overlapsLeft, .beyondLeft]).isEmpty && velocityX < 0 {
-           velocityX *= -2
-           }
-         */
 
         if tooFarLeft || tooFarRight{
             velocityX *= 0
             //taking a property of the ellipse object, radiusX, and we're changing it
-            //          ellipse.radiusX = ellipse.radiusX/2
+
         }
 
 
         if tooFarUp || tooFarDown{
             velocityY = 0
-            //            ellipse.radiusY = ellipse.radiusY/2
+
         }
-        func slowDown(velocity: inout Int, defaultVelocity: Int, doubleVelocity: inout Double){
-            doubleVelocity = Double(velocity)
-            if abs(velocity) > defaultVelocity{
-                var change = -0.1
-                if doubleVelocity.sign == .minus{
-                    change = 0.1
-                }
-                doubleVelocity += change
-                velocity = Int(doubleVelocity)
-            }
-            else if abs(velocity) < defaultVelocity{
-                //doubleVelocity = Double(defaultVelocity)
-                velocity = defaultVelocity
-            }
-        }
-        // enact cosine wave math
+        // enact cosine wave math and or change direction smoothly
         if ellipse.center.x  > 900 {
             velocityX -= Int.random(in: 0..<4)
         }
@@ -116,23 +96,6 @@ class UFO2: RenderableEntity, MouseMoveHandler
             velocityY += Int.random(in: 0..<2)
         }
 
-        /*        func growRadius(radius: inout Int, defaultRadius: Int){
-                  if radius < defaultRadius{
-                  var change = 5
-                  if Double(radius).sign == .minus{
-                  change = -5
-                  }
-                  radius += change
-                  }
-                  else if radius > defaultRadius{
-                  radius = defaultRadius
-                  }
-                  }
-                  //       slowDown(velocity: &velocityX, defaultVelocity:defaultVelocityX, doubleVelocity: &doubleVelocityX)
-                  //     slowDown(velocity: &velocityY, defaultVelocity:defaultVelocityY, doubleVelocity: &doubleVelocityY)
-                  // growRadius(radius: &ellipse.radiusX, defaultRadius:defaultRadiusX)
-                  // growRadius(radius: &ellipse.radiusY, defaultRadius:defaultRadiusY)
-         */
     }
     override func setup(canvasSize: Size, canvas: Canvas)
     {
@@ -148,11 +111,6 @@ class UFO2: RenderableEntity, MouseMoveHandler
     }
     func onMouseMove(globalLocation: Point, movement: Point)
     {
-        //        print(tick)
-        //   changeVelocity(velocityX:velocityX, velocityY:velocityY)
-        //      tick += 1
-        //ellipse.center = globalLocation
-        //     didRender = false
     }
 
     override func boundingRect() -> Rect
@@ -162,23 +120,19 @@ class UFO2: RenderableEntity, MouseMoveHandler
     override func render(canvas:Canvas)
     {
         changeVelocity(velocityX:velocityX, velocityY:velocityY)
-        //      tick += 1
-        //ellipse.center = globalLocation
+
+
         didRender = false
 
         if let canvasSize = canvas.canvasSize,  didRender == false
         {
-            // Clear the entire canvas
-            //           let clearRect = Rect(topLeft:Point(x:0, y:0), size:canvasSize)
-            //          let clearRectangle = Rectangle(rect:clearRect, fillMode:.clear)
-            //       canvas.render(clearRectangle)
             canvas.render(strokeStyle, fillStyle, lineWidth, ellipse, ellipse2)
 
         }
         didRender = true
         x+=1
         tick+=1
-        //        print(tick)
+
     }
 }
  

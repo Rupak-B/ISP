@@ -109,11 +109,11 @@ class UFO: RenderableEntity, MouseMoveHandler
         }
         // enact cosine wave math
         if ellipse.center.x  > 900 {
-            velocityX -= Int.random(in: 0..<3)
+            velocityX -= Int.random(in: 0..<4)
         }
 
         else {
-            velocityX += Int.random(in: 0..<3)
+            velocityX += Int.random(in: 0..<4)
         }
         if ellipse.center.x  ==  900{
             if tick > 700{
